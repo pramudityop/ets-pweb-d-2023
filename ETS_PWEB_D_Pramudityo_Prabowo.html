@@ -44,47 +44,33 @@
     <div id="dataDisplay">
     </div>
     <script>
-        // Define the API endpoint URL
         var apiUrl = "https://it-its.id/api/books";
-
-        // Send a GET request using JavaScript's fetch API when the page loads
-        fetch(apiUrl)
+        fetch(apiUrl) 
             .then(response => response.json())
-            .then(data => {
-                // Process the fetched data
-                displayData(data);
+            .then(data => {displayData(data);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
-            });
+              });
 
         function displayData(data) {
             var dataDisplay = document.getElementById("dataDisplay");
-            
-            data.forEach(function(item, index) {
-                // Create a clickable box for each data item
-                var dataItem = document.createElement("div");
-                dataItem.classList.add("dataItem");
-                dataItem.textContent = item.title;
+                data.forEach(function(item, index) {
+                  var dataItem = document.createElement("div");
+                  dataItem.classList.add("dataItem");
+                  dataItem.textContent = item.title;
                 
-                // Create additional information (hidden by default)
-                var additionalInfo = document.createElement("div");
-                additionalInfo.classList.add("additionalInfo");
-                additionalInfo.textContent = "Author: " + item.author + "\nPublished Year: " + item.year;
-                
-                // Toggle the visibility of additional info when clicking the item
+                  var additionalInfo = document.createElement("div");
+                  additionalInfo.classList.add("additionalInfo");
+                  additionalInfo.textContent = "Author: " + item.author + "\nPublished Year: " + item.year;
                 dataItem.addEventListener("click", function() {
-                    if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
-                        additionalInfo.style.display = "block";
-                    } else {
-                        additionalInfo.style.display = "none";
-                    }
+                  if (additionalInfo.style.display === "none" || additionalInfo.style.display === "") {
+                    additionalInfo.style.display = "block";
+                  } else {
+                    additionalInfo.style.display = "none";
+                  }
                 });
-                
-                // Append the additional info to the data item
                 dataItem.appendChild(additionalInfo);
-                
-                // Append the data item to the dataDisplay container
                 dataDisplay.appendChild(dataItem);
             });
           }
